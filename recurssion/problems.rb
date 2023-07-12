@@ -144,18 +144,33 @@ def bsearch(array, target)
 
     #inductive step
     idx = array.length / 2
+    
     if array[idx] < target
-        if (array.length-1-idx) %2 ==0
+        if bsearch(array[idx + 1..-1], target)==nil
+            return nil
+        else
             return idx+ bsearch(array[idx + 1..-1], target) +1
-        else
-            return idx+ bsearch(array[idx + 1..-1], target)
+            # if (array.length-1-idx) %2 ==0
+            #     return idx+ bsearch(array[idx + 1..-1], target) +1
+            # else
+            #     return idx+ bsearch(array[idx + 1..-1], target)
+            # end
         end
+    
     else
-        if (idx) %2 ==0
-            return idx - bsearch(array[0...idx], target) 
+        if bsearch(array[0..idx], target) ==nil
+            return nil
         else
-            return idx - bsearch(array[0...idx], target) -1
+            return idx - bsearch(array[0..idx], target)
+        
+            # if (idx) %2 ==0
+            #     return idx - bsearch(array[0...idx], target) 
+            # else
+            #     return idx - bsearch(array[0...idx], target) -1
+            # end
+
         end
+        
     end
 end
 
@@ -170,3 +185,4 @@ p bsearch([1, 3, 4, 5, 9], 5) # => 3
 p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
 p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
