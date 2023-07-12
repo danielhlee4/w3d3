@@ -94,3 +94,45 @@ end
 # p robot_parts[1] # => ["capacitors", "resistors", "inductors"]
 
 
+def itr_fibs(n)
+    return [0] if n ==1
+    return [0,1] if n ==2
+    
+    fib = [0,1]
+    #n =4 
+    #n =3 [0,1,1]
+    #n = 4  [0,1,1,2]
+
+    (0..n-3).each do |i|
+        fib << fib[i]+fib[i+1]
+    end
+    fib
+
+end
+
+
+# p itr_fibs(1) #=> [0]
+# p itr_fibs(2) #=> [0,1]
+# p itr_fibs(3) #=> [0,1,1]
+# p itr_fibs(4) #=> [0,1,1,2]
+# p itr_fibs(5) #=> [0,1,1,2,3]
+# p itr_fibs(6) #=> [0,1,1,2,3,5]
+
+def rec_fibs(n)
+    #base case
+    return [0] if n ==1
+    return [0,1] if n ==2
+
+    #inductive step
+    prev_fib = rec_fibs(n-1)
+    prev_fib << prev_fib[-1] + prev_fib[-2]
+    prev_fib
+end
+
+
+# p rec_fibs(1) #=> [0]
+# p rec_fibs(2) #=> [0,1]
+# p rec_fibs(3) #=> [0,1,1] rec_fibs(2) << rec_fibs(2)[-1]+rec_fibs(2)[-2]
+# p rec_fibs(4) #=> [0,1,1,2]
+# p rec_fibs(5) #=> [0,1,1,2,3]
+# p rec_fibs(6) #=> [0,1,1,2,3,5]
