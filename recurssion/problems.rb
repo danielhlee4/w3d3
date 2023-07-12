@@ -136,3 +136,37 @@ end
 # p rec_fibs(4) #=> [0,1,1,2]
 # p rec_fibs(5) #=> [0,1,1,2,3]
 # p rec_fibs(6) #=> [0,1,1,2,3,5]
+
+def bsearch(array, target)
+    #base case
+    return array.length / 2 if array[ array.length / 2 ] == target
+    return nil if array.length ==1 && array[0] != target
+
+    #inductive step
+    idx = array.length / 2
+    if array[idx] < target
+        if (array.length-1-idx) %2 ==0
+            return idx+ bsearch(array[idx + 1..-1], target) +1
+        else
+            return idx+ bsearch(array[idx + 1..-1], target)
+        end
+    else
+        if (idx) %2 ==0
+            return idx - bsearch(array[0...idx], target) 
+        else
+            return idx - bsearch(array[0...idx], target) -1
+        end
+    end
+end
+
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# 4 != 5
+# since 4 < 5, check upper half
+# will now run bsearch on [index(4) + 1 .. -1]
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
